@@ -15,8 +15,6 @@ app.post('/ci', (req, res) => {
   console.log(`GitHub event: ${event}`);
   console.log(`Repository: ${req.body.repository.name}`);
 
-
-
   if(event=='push') {
     console.log(`    Owner: ${req.body.repository.owner.name}`);
     console.log(`    Ref: ${req.body.ref}`);
@@ -25,6 +23,7 @@ app.post('/ci', (req, res) => {
     // see https://developer.github.com/v3/activity/events/types/#events-api-payload-22
     let statuses_url = `/repos/${req.body.repository.owner.name}/${req.body.repository.name}/statuses/${req.body.after}`;
     console.log(`Statuses url: ${statuses_url}`)
+
   }
 
   if(event=='pull_request') {
@@ -36,6 +35,11 @@ app.post('/ci', (req, res) => {
 
   res.status(201).end();
 });
+
+app.get('/hello', (req, res) => {
+  res.send({message: "Hello!"});
+});
+
 
 app.listen(http_port)
 
