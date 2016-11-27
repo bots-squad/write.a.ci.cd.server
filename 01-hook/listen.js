@@ -20,6 +20,10 @@ app.post('/ci', (req, res) => {
   res.status(201).end();
 });
 
+app.get('/hello', (req, res) => {
+  res.send({message: "Hello!"});
+});
+
 app.listen(http_port)
 
 console.log(`Listening on ${http_port}`);
