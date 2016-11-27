@@ -1,0 +1,22 @@
+{
+  "name": "write.a.ci.cd.server",
+  "version": "1.0.0",
+  "description": "sandbox",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bots-squad/write.a.ci.cd.server.git"
+  },
+  "author": "k33g",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bots-squad/write.a.ci.cd.server/issues"
+  },
+  "homepage": "https://github.com/bots-squad/write.a.ci.cd.server#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "node-fetch": "^1.6.3",
+    "shelljs": "^0.7.5",
+    "uuid": "^3.0.0"
+  }
+}
