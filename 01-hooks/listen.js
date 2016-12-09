@@ -8,12 +8,26 @@ let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+// -> hook
 app.post('/ci', (req, res) => {
 
   let event = req.headers['x-github-event'];
 
   console.log(`GitHub event: ${event}`);
   console.log(`Repository: ${req.body.repository.name}`);
+
+  if(event=='issues') {
+    console.log(`    title: ${req.body.issue.title}`);
+    console.log(`    body: ${req.body.issue.body}`);
+    console.log(`    user: ${req.body.issue.user.login}`);
+
+  }
+
+  if(event=='issue_comment') {
+    console.log(`    body: ${req.body.comment.body}`);
+    console.log(`    user: ${req.body.comment.user.login}`);
+  }
+
 
   if(event=='push') {
     console.log(`    Owner: ${req.body.repository.owner.name}`);
@@ -33,11 +47,26 @@ app.post('/ci', (req, res) => {
     console.log(`    Sender: ${req.body.sender.login}`);
   }
 
-  res.status(201).end();
-});
+  /*
+  if(event=='deployment_status') {
+    console.log(`    Deployment Id: ${req.body.deployment.id}`);
+    console.log(`    Deployment Ref: ${req.body.deployment.ref}`);
+    console.log(`    Deployment Environment: ${req.body.deployment.environment}`);
+    console.log(`    Deployment Description: ${req.body.deployment.description}`);
+    console.log(`    Deployment State: ${req.body.deployment_status.state}`);
+  }
 
-app.get('/hello', (req, res) => {
-  res.send({message: "Hello!"});
+  if(event=='deployment') {
+    console.log(`    Deployment Id: ${req.body.deployment.id}`);
+    console.log(`    Deployment Ref: ${req.body.deployment.ref}`);
+    console.log(`    Deployment Environment: ${req.body.deployment.environment}`);
+    console.log(`    Deployment Description: ${req.body.deployment.description}`);
+    console.log(`    Deployment Task: ${req.body.deployment_status.task}`);
+  }
+  */
+
+
+  res.status(201).end();
 });
 
 

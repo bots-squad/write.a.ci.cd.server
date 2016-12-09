@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+
+/*
+https://developer.github.com/v3/repos/deployments/#list-deployments
+*/
 const GitHubClient = require('./octocat.js').GitHubClient;
 
 let githubCli = new GitHubClient({
@@ -8,17 +12,10 @@ let githubCli = new GitHubClient({
 
 let hostname = require("os").hostname();
 
-let statuses_url = `/repos/${process.argv[2]}/${process.argv[3]}/statuses/${process.argv[4]}`;
-
-// ./change-status ACME yo sha_last_commit status
+// ./list-deployments.js ACME yo
 
 // statuses: success error failure pending
-githubCli.postData({path: statuses_url, data:{
-    state: process.argv[5]
-  , description: "Hi, I'm Hector :|"
-  , context: "ci/hector"
-  , target_url: `http://${hostname}:9090/hello`
-}})
+githubCli.getData({path: `/repos/${process.argv[2]}/${process.argv[3]}/deployments`})
 .then(res => {
   console.log(res);
 })
